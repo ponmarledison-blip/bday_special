@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset=utf8>
+  <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <style>
+    :root {
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font: 14px -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
+      color: #000
+    }
+
+    img {
+      max-width: 100%
+    }
+
+    [hidden]:not([hidden=until-found i]) {
+      display: none !important
+    }
+  </style>
+</head>
+
+<body>
+  <title>Birthday Wall</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=DynaPuff:wght@500;700&family=Nunito:wght@400;600;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+
+  <div class="progress" id="progress" hidden><span></span></div>
+  <div class="floaters" id="floaters" aria-hidden="true"></div>
+
+  <main>
+    <section id="intro" class="screen">
+      <p class="kicker">Something for you</p>
+      <h1 id="introTitle"></h1>
+      <button class="envelope" id="envelope" aria-label="Open your birthday envelope">
+        <span class="env-back"></span>
+        <span class="env-letter" aria-hidden="true">For you</span>
+        <span class="env-front"></span>
+        <span class="env-flap"></span>
+        <span class="seal" aria-hidden="true">&#10047;</span>
+      </button>
+      <p class="hint">Tap to open</p>
+    </section>
+
+    <section id="wall" hidden>
+      <p class="hint">Scroll down<span class="arrow" aria-hidden="true">&#8595;</span></p>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section id="finale" class="screen" hidden>
+      <button class="cake" id="cake" aria-label="Blow out the candles">
+        <svg viewBox="0 0 220 200" aria-hidden="true">
+          <ellipse cx="110" cy="180" rx="104" ry="14" fill="#fffafb" />
+          <rect x="20" y="112" width="180" height="64" rx="14" fill="#ff7fb0" />
+          <rect x="20" y="112" width="180" height="13" rx="6" fill="#fffafb" />
+          <g fill="#ffc93c">
+            <rect x="40" y="140" width="10" height="4" rx="2" transform="rotate(20 45 142)" />
+            <rect x="82" y="152" width="10" height="4" rx="2" transform="rotate(-25 87 154)" />
+            <rect x="128" y="142" width="10" height="4" rx="2" transform="rotate(35 133 144)" />
+            <rect x="168" y="154" width="10" height="4" rx="2" transform="rotate(-15 173 156)" />
+          </g>
+          <rect x="46" y="72" width="128" height="46" rx="12" fill="#ffb3d1" />
+          <rect x="46" y="72" width="128" height="13" rx="6" fill="#fffafb" />
+          <g fill="#fffafb">
+            <circle cx="66" cy="88" r="6" />
+            <circle cx="96" cy="90" r="6" />
+            <circle cx="128" cy="88" r="6" />
+            <circle cx="156" cy="90" r="6" />
+          </g>
+          <rect x="70" y="38" width="10" height="34" rx="3" fill="#ffc93c" />
+          <rect x="105" y="38" width="10" height="34" rx="3" fill="#d6286f" />
+          <rect x="140" y="38" width="10" height="34" rx="3" fill="#ffc93c" />
+          <ellipse class="flame" cx="75" cy="27" rx="5.5" ry="10" fill="#ffb020" />
+          <ellipse class="flame" cx="110" cy="27" rx="5.5" ry="10" fill="#ffb020" />
+          <ellipse class="flame" cx="145" cy="27" rx="5.5" ry="10" fill="#ffb020" />
+        </svg>
+      </button>
+      <p class="hint" id="cakeHint">Tap the cake to blow out the candles</p>
+      <h2 id="finaleTitle"></h2>
+      <div class="finale-msg" id="finaleMsg"></div>
+      <div class="snack" aria-hidden="true">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <g fill="#ffc93c">
+            <rect x="14" y="8" width="7" height="30" rx="3" transform="rotate(-10 17 23)" />
+            <rect x="24" y="4" width="7" height="34" rx="3" />
+            <rect x="34" y="6" width="7" height="32" rx="3" transform="rotate(6 37 22)" />
+            <rect x="43" y="10" width="7" height="28" rx="3" transform="rotate(14 46 24)" />
+          </g>
+          <path d="M10 34h44l-5 26H15z" fill="#d6286f" />
+          <path d="M10 34h44l-1 6H11z" fill="#ff5c9a" />
+        </svg>
+        <svg width="72" height="72" viewBox="0 0 72 72">
+          <path d="M18 54c-10-4-8-16 2-20l18-18c8-8 22 0 18 12-2 6-8 10-14 14L30 56c-3 3-8 2-12-2z" fill="#e8913a" />
+          <path d="M26 30c4-6 12-10 20-8" stroke="#ffc93c" stroke-width="4" fill="none" stroke-linecap="round" />
+          <circle cx="14" cy="60" r="6" fill="#fffafb" />
+          <circle cx="22" cy="64" r="6" fill="#fffafb" />
+        </svg>
+      </div>
+      <div class="nav">
+        <button class="btn" id="tune">Play a little tune</button>
+        <button class="btn" id="boom">More confetti</button>
+        <button class="btn ghost" id="backToWall">Back to the top</button>
+      </div>
+    </section>
+  </main>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
