@@ -4,10 +4,11 @@
    photo: a path like "photos/mika.jpg", or "" for the placeholder.
    Use \n inside a message for a line break.
    ============================================================ */
-const HER_NAME = "Bea Erica Caballes"; // shown on the envelope and the finale
+const HER_NAME = "Bea Erica"; // shown on the envelope and the finale
 const MY_NAME = "Edisson"; // signs the last message
+const MY_PHOTO = "photos/374e2224-269c-42c8-bbb4-39949a0fb5a2.jfif"; // your photo, e.g. "photos/me.jpg" (leave "" for the placeholder)
 const MY_MESSAGE =
-  "This is where your message goes. It gets the final, full-screen moment with confetti, so take your time with it.\n\nHappy birthday!";
+  "Hiiii Beaa, happy 20th birthday!! It's been a while since we started talking to each other again, and I'm glad we got the chance to reconnect. I don't know exactly asa padung ang kaugmaon, and labon na I'm still figuring myself out (sorry about that), but I'll do my best to make our little moments together worthwhile and make you feel appreciated. I'd also love to get to know you better along the way. I hope this new chapter of your life brings you all the good things you deserve. Enjoy your day, Beaa! Here's to future food trips and random hangouts with you, hehehe!";
 
 const FRIENDS = [
   {
@@ -74,6 +75,27 @@ const FRIENDS = [
       "Hii, Bea! Happy birthday! 🤍Di jud ko kalimot sa first interaction nato. 🥹 Intimidating ka at first, pero buotan man diay HAHAHAHA! I honestly didn't expect nga magka-amiga ta, but look at us now! 🥺Thank you for making my first year in college a lot easier and memorable. Thank you kay ikaw jud ang mo-approach nako pag first year pa nato. Malipay jud ko every time manghagad ka nako'g kaon or mangutana ka asa ko mag-lunch kay at that time, wala pa jud koy laing kaila. Ikaw jud akong first nga naka close, and tungod nimo, I never felt like I was going through my first year alone. I'm really, really thankful nga nagkaila ta. I hope you know how much I appreciate you and our friendship (bisag di na kaayo ko kauban ninyo 😭) Again HAPPY BIRTHDAY and thank you for being you and for being such a good friend. ",
     photo: "photos/IMG_20261116_230125 - Desyrel Delfin.jpg",
   },
+  {
+    name: "Sam",
+    nickname: "Kun",
+    message:
+      "HAPPY BIRTHDAY KUN!!! My former ka partner sa RLE and my ka delulu errr btaw we old as hell na pero wala, waman tay choice er. Btaw stay gastador plss err. Btaw again HAPPY BIRTHDAY KUNN🥳🥳🥳 akoa sigurong message pinaka erset sorna",
+    photo: "photos/e6bd821be9594d1aeb6dc4787ac7b4a4 - Samantha Amba.jpeg",
+  },
+  {
+    name: "Aly",
+    nickname: "beaaaa",
+    message:
+      "HAPPY BIRTHDAY, BEAAA!! 🥳💗 I don't think I say this enough, pero I'm genuinely grateful to have you as a friend. As you enter another chapter of your life, I hope na you never forget how loved and appreciated you are. You know, as your friend, I really do want nothing but happiness for you. I want to see you experience life, achieve your dreams, and become the person you’ve always wanted to be. Pero usahay, I can’t help but worry about you, especially when mag make kag impulsive decisions AHAHHAHAHA (pero I kinda love that about u ha kay you have the guts, pero please be careful always !!). I hope na you learn to give yourself a little more time before acting on things, especially when emotions get in the way. And that I’m hoping na you realize na you don’t have to figure everything out right away, and it’s okay to take a step back and think things through. Since part naka sa 20’s club (uso na jud existential crisis aning dapita), I hope you become more gentle with yourself. Don’t be too hard on yourself when things don’t go as planned (chill rata ani bai), and please don’t rush into things just because you feel like you have to. There’s so much more to life, and you have all the time to figure it out. I hope life treats you kindly, Bea. I hope na you find happiness in the simplest things, meet more kindhearted people (like me eheheh), and experience the kind of love and friendship na deserve jud nimo. And whatever life brings, I hope you never forget that you have a friend who will always wish the best for you.  Enjoy your day, Bea!! Lab ka nako saurr much!! 💗",
+    photo: "photos/IMG_0547 - Alyssa Mae PONIO.jpeg",
+  },
+  {
+    name: "Ka-ye",
+    nickname: "ERICA 🦅🦅🦅",
+    message:
+      "HAPPY BORNDAY BEA ERICA ALIMPOLOS CABALLES!!! 🎂🥳🎉🎈🎁🎊🕯🍰. I don't know where to start really but one thing is for certain, you are one of the best listeners out there. Whether it be for a dearest friend or a stranger, you truly are unique 🤗. Even if you don't quite understand what the person says, you still have the trait to sympathize with the person. I may have missed a lot of times due to this cursed program (damn) but even if we don't meet up often, you are one of my dearest people I could ever have 🥺 and will always and forever have a special place in my heart 💙. No matter what, you are always there for us 🥰. Thank you Bea for being the best you can be to us. As you turn 20, I hope and bless you with the best of what life has to offer. Remember that our what ifs and dreams are slowly coming true ✨️✨️✨️. I look forward to our Future RN 🥳 and be the best Nurse out there 😍. Again HAPPY BORNDAY BEA!!! 💗 Enjoy your birthday!!! 💖",
+    photo: "",
+  },
 ];
 /* ============================================================ */
 
@@ -128,6 +150,19 @@ document.addEventListener("pointerdown", (e) => {
     (Math.random() - 0.5) * 60,
     14 + Math.random() * 12,
   );
+});
+
+/* Your photo in the finale */
+$("myPhoto").innerHTML =
+  `<figure class="polaroid" style="--tilt:-2deg;--tape:4deg"><div class="photo">${MY_PHOTO ? `<img src="${esc(MY_PHOTO)}" alt="Photo of ${esc(MY_NAME)}">` : placeholder}</div><figcaption>${esc(MY_NAME)}</figcaption></figure>`;
+attachTilt($("myPhoto").firstElementChild);
+$("myPhoto").addEventListener("click", (e) => {
+  const pol = e.target.closest(".polaroid");
+  if (pol && !REDUCED) {
+    pol.classList.remove("wiggle");
+    void pol.offsetWidth;
+    pol.classList.add("wiggle");
+  }
 });
 
 /* Cards */
